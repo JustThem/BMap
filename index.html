@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body,
+        html {
+            height: 99%;
+            width: 100%;
+            margin: 0;
+            /* overflow: hidden; */
+            /* font-weight: 700; */
+        }
+
+        .boss {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #map {
+            height: 100%;
+            position: relative;
+        }
+
+
+
+        .map-right {
+            width: 25%;
+            height: 100%;
+            background-color: #091732;
+            position: relative;
+            z-index: 1;
+        }
+
+
+
+        p {
+            height: 30px;
+        }
+
+
+
+        .show-option {
+            background-color: #fff;
+            opacity: 0.5;
+            width: 80%;
+            height: 52px;
+            position: absolute;
+            top: 84.6%;
+        }
+
+        .option {
+            width: 80%;
+            height: 52px;
+            position: absolute;
+            top: 83.6%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .item-map {
+            width: 100px;
+            height: 160px;
+            /* background-color: red; */
+            position: relative;
+            text-align: center;
+        }
+
+        .item-map img {
+            position: absolute;
+            right: calc((100% - 50px) / 2);
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            z-index: 999;
+
+        }
+
+        .but-map {
+            position: absolute;
+            bottom: calc((100% - 140px) / 2);
+
+        }
+
+        .up-map {
+            width: 100px;
+            height: 100px;
+            background-color: #336699;
+            color: #fff;
+            position: absolute;
+            /* right: -25px;
+            bottom: 60px; */
+            top: 0;
+            left: 0;
+        }
+
+        .up-icon {
+            width: 100px;
+            height: 100px;
+            background-color: #996633;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .switch {
+            width: 30px;
+            height: 60px;
+            background-color: #091732;
+            position: absolute;
+            top: calc((100% - 60px) / 2);
+            left: -30px;
+            color: #fff;
+            writing-mode: horizontal-tb;
+            -webkit-writing-mode: vertical-rl;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        .op-map {
+            width: 80%;
+        }
+
+        .sw-map {
+            width: 100%;
+        }
+
+        .hide-map-right {
+            width: 0;
+        }
+
+        .title {
+            width: 100%;
+            background-color: #014C69;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            color: #fff;
+        }
+
+        .title div {
+            width: 30%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .title div:hover {
+            /* border-bottom: 3px solid red; */
+            background-color: #0D8DBF;
+        }
+
+        .show-time {
+            background-color: #0D8DBF;
+        }
+
+        .content-map {
+            /* margin-top: 20px; */
+            height: 100%;
+            width: 100%;
+            position: relative;
+            /* background-color: #fff; */
+            /* z-index: 1; */
+        }
+
+        .item-one {
+            width: 100%;
+            height: 120px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            /* background-color: hotpink; */
+        }
+
+        .item-one>div {
+            background: #091732;
+            border: 1px solid transparent;
+            border-radius: 80px;
+            width: 80px;
+            height: 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .item-one>div::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            bottom: -5px;
+            left: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #52C0DA, #4D5884, #8E95B2);
+            border-radius: 80px;
+            content: '';
+            z-index: -1;
+        }
+
+        .item-two {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* background-color: green; */
+            /* opacity: 0.3; */
+            width: 100%;
+            height: 88px;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .item-one h4 {
+            color: red;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            z-index: 9999;
+        }
+
+        .item-one h5 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .item-two>div {
+            width: 70px;
+            height: 35px;
+            border-radius: 70px 70px 0 0;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            background-color: #091732;
+        }
+
+        .item-two>div::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            bottom: 0px;
+            right: -4px;
+            border-radius: 70px 70px 0 0;
+            background: linear-gradient(135deg, #D90222, #B00AA0);
+            /* background: linear-gradient(135deg, #037FFF, #11BCF2); */
+            z-index: -1;
+        }
+
+        .item-two>div:nth-of-type(2):after {
+            background: linear-gradient(135deg, #037FFF, #11BCF2);
+        }
+
+        .wrong-message {
+            /* margin-top: 30px; */
+            height: 150px;
+            width: 100%;
+            margin: 30px 0px;
+        }
+
+        .wrong-message h4 {
+            color: #55D1E9;
+            width: 100%;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .wrong-message p {
+            color: red;
+            margin: 5px 0;
+            padding-left: 30px;
+        }
+
+        .wrong-message p span {
+            margin-right: 20px;
+        }
+
+        #echarts {
+            width: 100%;
+            height: 400px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .title-two {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .title-two>div {
+            margin-top: 20px;
+            width: 100px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            /* background-color: red; */
+        }
+
+        .title-two img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .layui-tree-txt {
+            color: #fff !important;
+        }
+
+        .layui-tree-icon .layui-icon {
+            color: #fff !important;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript"
+        src="http://api.map.baidu.com/api?v=2.0&ak=mm21QKafDIFNWgvxieCxAGDTdVjs6ebC"></script>
+    <script src="layui/layui.js"></script>
+    <script src="echarts.js"></script>
+    <script src="jquery.js"></script>
+    <title>百度地图API</title>
+</head>
+
+<body>
+    <div class="boss">
+        <div id="map" class="op-map"></div>
+        <div class="map-right">
+            <div onclick="onSwitch()" class="switch">关闭</div>
+            <div class="title">
+                <div class="show-time" onclick="openTitle(0)">预警信息</div>
+                <div onclick="openTitle(1)">分类搜索</div>
+                <div onclick="openTitle(2)">专题信息</div>
+            </div>
+
+            <div class="content-map">
+                <div class="title-one">
+                    <div class="item-one">
+                        <div>
+                            <h4>警告信息</h4>
+                            <h5>10条</h5>
+                        </div>
+                        <div>
+                            <h4>故障信息</h4>
+                            <h5>10条</h5>
+                        </div>
+                    </div>
+                    <div class="item-two">
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="wrong-message">
+                        <h4>报警记录</h4>
+                        <p><span>◆</span>2017年5月4日市A区12#机器气压过高报警</p>
+                        <p><span>◆</span>上海市A区12#机器气压过高报警</p>
+                        <p><span>◆</span>江苏省12#机器气压过高报警</p>
+                    </div>
+                    <div id="echarts">
+
+                    </div>
+                </div>
+                <div class="title-two">
+
+                </div>
+                <div class="title-three">
+                    <div id="test1" class="demo-tree demo-tree-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id='show-div' style="display: none;">
+        这里是要写html 的 大窗div
+    </div>
+    <button onclick="changeCenter()">改变中心点了</button>
+
+    <div class="show-option"></div>
+    <div class="option">
+        <div class="item-map">
+            <!-- <button class="but-map" onclick="addMap()">增加新坐标</button> -->
+        </div>
+        <div class="item-map">
+            <img onclick="openType('up-map')" src="style/map.png" alt="">
+            <div class="up-map hide">
+                <p><input onclick="getMap()" type="checkbox" class="map" value="0" checked='checked'>坐标一</p>
+                <!-- <p><input onclick="getMap()" type="checkbox" class="map" value="1" checked='checked'>坐标二</p> -->
+            </div>
+        </div>
+        <div class="item-map">
+            <img onclick="openType('up-icon')" src="style/icon.png" alt="">
+            <div class="up-icon hide">
+                <p><input onclick="getIcon()" type="checkbox" class="icon" value="smile">笑脸</p>
+                <p><input onclick="getIcon()" type="checkbox" class="icon" value="cry">哭脸</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
+        })
+
+
+        var isShow = 11;
+        var A = 10; //缩放级别10 要显示线, 不显示图标
+        var B = 9; // 缩放级别9  要显示图标, 不显示线
+        var C = 1 // 缩放级别 全部显示
+        var arr = [0] //筛选地图类型
+        var type = [] // 筛选地图图标类型
+        var isType = true // 是否开启筛选地图图标类型
+        var isAdd = true // 是否增加新坐标
+        var wrongList = [] // 异常坐标点
+        var isReq = true // 是否请求
+        var LatAndLon = []// 路线 经纬度坐标
+
+        var map = new BMap.Map('map') // 创建 map 实例
+        var ws = new WebSocket('ws://localhost:5050') // 连接 ws
+
+
+        window.onload = function () {
+            // 开始
+            // console.log(layer.tree, '111')
+            onENList()
+            onBMap()
+
+            // onMapStart()
+            openEcharts()
+            addWxListener()
+        }
+
+        map.addEventListener('zoomend', (e) => {
+            // 地图级别 3 - 19 监听地图缩放级别结束时 zoomend 事件
+            let nowZoom = map.getZoom() //获取当前地图缩放级别
+            if (nowZoom > A) {
+                isShow = C
+                onMapStart()
+                if (wrongList.length) show_wrong();
+            } else {
+                if (nowZoom === A) {
+                    console.log('不显示图标', nowZoom)
+                    isShow = A
+                    onMapStart()
+                } else if (nowZoom === B) {
+                    console.log('不显示线', nowZoom)
+                    isShow = B
+                    onMapStart()
+                } else {
+                    console.log('全部不显示', nowZoom)
+                    map.clearOverlays()
+                }
+            }
+        })
+
+        function addWxListener() {
+            // 接受ws发来的信息
+            ws.onopen = function (e) {
+                console.log('客户端：服务端已打开ws')
+            }
+            ws.onmessage = function (e) {
+                // console.log(e, '收到服务端传递过来的信息')
+                layer.msg('发现异常，已前往');
+                let data = JSON.parse(e.data)
+                changeCenter(data)
+            }
+        }
+
+        function onBMap() {
+            // 创建地图基本展示控件
+
+            map.centerAndZoom(new BMap.Point(117.25559, 29.38148), 11); // 初始化地图，设置中心坐标点和地图缩放级别
+
+            // map.addControl(new BMap.NavigationControl()) // 添加左上角 比例工具尺
+            map.addControl(new BMap.CityListControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                offset: new BMap.Size(10, 20),
+                // 切换城市之前事件
+                // onChangeBefore: function(){
+                //    alert('before');
+                // },
+                // 切换城市之后事件
+                // onChangeAfter:function(){
+                //   alert('after');
+                // }
+            })) // 添加筛选城市控件
+
+            map.enableScrollWheelZoom(true) // 开启鼠标滚动缩放
+
+
+            map.addControl(new BMap.MapTypeControl({
+                mapTypes: [BMAP_NORMAL_MAP, BMAP_SATELLITE_MAP, BMAP_HYBRID_MAP], // [地图类型, 卫星类型, 混合类型]
+                anchor: BMAP_ANCHOR_TOP_RIGHT // 显示在右上角
+            })) // 显示 地图类型控件
+
+
+            // map.addControl(new BMap.OverviewMapControl()) //添加缩略图地图控件
+            // map.addControl(new BMap.OverviewMapControl({ isOpen: false, anchor: BMAP_ANCHOR_BOTTOM_RIGHT })) // 默认不展开，显示再右下角
+
+
+            // var geolocationControl = new BMap.GeolocationControl() // 获取定位控件实例, 添加监听事件
+            // geolocationControl.addEventListener('locationSuccess', (res) => {
+            //     // 定位成功事件
+            //     console.log(res)
+            // })
+            // geolocationControl.addEventListener('locationError', (err) => {
+            //     // 定位失败事件
+            //     console.log(err)
+            //     alert(err.message)
+            // })
+            // map.addControl(geolocationControl) // 添加 定位控件 左下角
+        }
+
+        function onMapStart() {
+            // 分配(筛选)坐标点 -- 开始加载地图坐标、路线、图标、弹出层
+
+            let list = []
+            // console.log(LatAndLon, 'ddddd')
+            arr.forEach((item, index) => {
+                list.push(LatAndLon[item])
+            })
+            // console.log(list)
+            list.forEach((item, index) => {
+                // console.log(item,'111')
+                onMaker(item, index)
+            })
+        }
+
+        function onMaker(ENList, ENIndex) {
+            // 创建路线
+            if (ENList === undefined) return;
+            let lineList = []
+            ENList.forEach((item, index) => {
+                lineList.push(item.point)
+            })
+            // console.log(lineList)
+            var polyline = new BMap.Polyline(lineList, {
+                strokeColor: "#000", // 颜色
+                strokeWeight: '20', // 宽度
+                strokeOpacity: 1 // 透明度  取值范围0 - 1
+            })
+
+            map.addOverlay(polyline) // 添加路线
+
+            // 创建路线标点图标
+            var myIcon = new BMap.Icon('style/mapLogo.png', new BMap.Size(70, 70), { imageSize: new BMap.Size(70, 70) }) // 标点图片, 图片大小，图片大小
+
+            for (let i = 0; i < ENList.length; i++) {
+                let m = ENIndex + 1
+                let s = i + 1
+                // let info = '坐标' + m + '中的：第' + s + 
+                let info = ENList[i].name
+                var marker = new BMap.Marker(ENList[i].point, { icon: myIcon }) // 替换为设置好的标点样式
+                label = new BMap.Label(info, { offset: new BMap.Size(60, 50) }); // 添加当前标点的标题
+                if (isType) twoIcon(ENList, i, info);
+                marker.setLabel(label); // 添加标题
+                map.addOverlay(marker) // 添加标点
+
+                // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 添加动画 (bug: 缩放地图后 会重叠标点)
+
+                if (isShow !== C) onClearOverlay(polyline);
+
+                // 添加标点 点击事件
+                addEventLis(marker, info, ENList[i].point, ENList[i].desc)
+            }
+        }
+
+        function addInfoWin(info, desc) {
+            let content = `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding:0 10px">
+            <h4>` + info + `</h4>
+            <img onclick='onLayer(\`` + desc + `\`)' style="width: 25px;height: 25px;" src="style/message.png" alt="">
+        </div>
+        <div style="height: 100px;">
+            ` + desc.slice(0, 10) + '...' + `
+        </div>`
+            return new BMap.InfoWindow(content)
+        }
+
+        function addEventLis(marker, info, infoPoint, desc) {
+            let infoWindow = addInfoWin(info, desc)
+            // 监听页面点击事件
+            marker.addEventListener('click', (e) => {
+                // let p = e.target.point
+                // onLayer()
+                map.openInfoWindow(infoWindow, infoPoint)
+            })
+        }
+
+        function onClearOverlay(polyline) {
+            // 依次清除坐标点。
+            if (isShow === A) {
+                polyline.disableMassClear();
+                map.clearOverlays();
+            } else if (isShow === B) {
+                clearMap()
+            }
+
+        }
+
+        function clearMap() {
+            // 清除全部
+            let overlays = map.getOverlays()
+            overlays.forEach((item, index) => {
+                item.enableMassClear()
+            })
+            map.clearOverlays()
+        }
+
+        function getMap() {
+            // 筛选地图类别
+            arr = []
+            let input = document.getElementsByClassName('map')
+            for (let i = 0; i < input.length; i++) {
+                if (input[i].checked) {
+                    arr.push(parseInt(input[i].value))
+                }
+            }
+            clearMap()
+            onMapStart()
+            show_wrong()
+        }
+
+        function getIcon(e) {
+            // 筛选图标类型
+            type = []
+            let input = document.getElementsByClassName('icon')
+            for (let i = 0; i < input.length; i++) {
+                if (input[i].checked) {
+                    type.push(input[i].value)
+                }
+            }
+            if (type.length === 0) isType = false;
+            else isType = true;
+            clearMap()
+            onMapStart()
+        }
+
+        function twoIcon(ENList, i, info) {
+            // 添加第二个图标
+            for (let t = 0; t < type.length; t++) {
+                var isIcon = new BMap.Icon('style/' + type[t] + '.png', new BMap.Size(100, 100), { imageSize: new BMap.Size(50, 50), imageOffset: new BMap.Size(50, 50) })
+                if (type[t] === 'smile') {
+                    if (i % 2 == 0) var twoMarker = new BMap.Marker(ENList[i].point, { icon: isIcon });
+                } else {
+                    if (i % 2 != 0) var twoMarker = new BMap.Marker(ENList[i].point, { icon: isIcon });
+                }
+                map.addOverlay(twoMarker)
+                if (twoMarker) addEventLis(twoMarker, info, ENList[i].point, ENList[i].desc);
+            }
+
+
+        }
+
+        function onLayer(desc) {
+            // 弹出 layui弹出层
+
+            let div = document.getElementById('show-div')
+            div.innerHTML = desc
+            layer.open({
+                type: 1,
+                content: layui.jquery('#show-div'),
+                area: ['80%', '80%']
+            })
+        }
+
+        function changeCenter(data) {
+            // 改变地图中心点
+            if (data) {
+                wrongList.push(data)
+                map.centerAndZoom(new BMap.Point(data.e, data.n), 11);
+                show_wrong()
+            } else {
+                map.centerAndZoom(new BMap.Point(117.26, 29.36), 11);//改变中心点为北京市
+            }
+        }
+
+        function show_wrong() {
+            // 显示异常坐标
+            wrongList.forEach((item, index) => {
+                let point = new BMap.Point(item.e, item.n)
+                let wrongIcon = new BMap.Icon("style/school.png", new BMap.Size(50, 50), { imageSize: new BMap.Size(50, 50) });
+                let wrongMarker = new BMap.Marker(point, { icon: wrongIcon });
+                map.addOverlay(wrongMarker);
+                addEventLis(wrongMarker, item.name, point, item.desc)
+            })
+        }
+
+        function openType(classType) {
+            // 地图浮层与图标浮层
+            let upType = document.getElementsByClassName(classType)[0]
+            if (/hide/.test(upType.className)) {
+                upType.className = classType
+            } else {
+                upType.className = classType + ' hide'
+            }
+        }
+
+        function addMap() {
+            // 添加新坐标与删除新坐标
+            let upMap = document.getElementsByClassName('up-map')[0]
+            let option = document.getElementsByClassName("but-map")[0]
+            if (!isAdd) {
+                LatAndLon.pop()
+                arr.pop()
+                upMap.removeChild(upMap.children[2])
+                isAdd = true
+                option.innerText = '增加新坐标'
+                clearMap()
+                onMapStart()
+                alert('删除新数据');
+                return
+
+            }
+            arr.push(arr.length)
+            LatAndLon.push([
+                new BMap.Point(121.51937542, 30.15025555),
+                new BMap.Point(121.51937542, 30.20025555),
+                new BMap.Point(121.51937542, 30.22025555),
+                new BMap.Point(121.51937542, 30.25025555),
+                new BMap.Point(121.51937542, 30.27025555),
+            ])
+            onMapStart()
+            map.centerAndZoom(new BMap.Point(121.51937542, 30.15025555), 11)
+            let p = document.createElement('p')
+            let i = arr.length - 1
+            p.innerHTML = `<input onclick="getMap()" type="checkbox" class="map" value="` + i + `" checked='checked'>坐标三</p>`
+            upMap.appendChild(p)
+            isAdd = false
+            option.innerText = '删除新坐标'
+        }
+
+        function onSwitch() {
+            // 控制右边侧边缩放
+            let classMap = document.getElementById('map')
+            let classMapRight = document.getElementsByClassName('map-right')[0]
+            let sw = document.getElementsByClassName('switch')[0]
+            let showOption = document.getElementsByClassName('show-option')[0]
+            let option = document.getElementsByClassName('option')[0]
+            let title = document.getElementsByClassName('title-one')[0]
+            if (/关闭/.test(sw.innerText)) {
+                classMap.className = 'sw-map'
+                classMapRight.className = 'map-right hide-map-right'
+                sw.innerText = '展开'
+                showOption.className = 'show-option sw-map'
+                option.className = 'option sw-map'
+                title.className = 'title-one hide'
+            } else {
+                classMap.className = 'op-map'
+                classMapRight.className = 'map-right'
+                sw.innerText = '关闭'
+                showOption.className = 'show-option'
+                option.className = 'option'
+                title.className = 'title-one'
+            }
+
+        }
+
+        function openEcharts() {
+            // 添加图表
+            var myChart = echarts.init(document.getElementById('echarts'));
+            let titleList = []
+            let valueList = []
+            requrst({
+                url: 'bigdata/bdmap/ticket_typ_count',
+                data: {},
+                success: function (res) {
+                    let data = JSON.parse(res).data
+                    console.log(data)
+
+                    data.forEach((item) => {
+                        titleList.push(item.type_name)
+                        valueList.push({ value: item.t_num, name: item.type_name })
+                        let option = {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                right: 10,
+                                data: titleList,
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            },
+                            series: [
+                                {
+                                    name: '车类型',
+                                    type: 'pie',
+                                    radius: ['50%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'inner'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold',
+                                                color: '#fff'
+
+                                            }
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data: valueList
+                                }
+                            ]
+                        };
+
+                        myChart.setOption(option)
+                    })
+                }
+            })
+
+
+        }
+
+        function openTitle(index) {
+            // 切换标题
+            let titleOne = document.getElementsByClassName('title-one')[0]
+            let titleTwo = document.getElementsByClassName('title-two')[0]
+            let titleThree = document.getElementsByClassName('title-three')[0]
+            let title = document.getElementsByClassName('title')[0].children
+            if (index === 0) {
+                titleOne.className = 'title-one'
+                titleTwo.className = 'title-two hide'
+                titleThree.className = 'title-three hide'
+                title[0].className = 'show-time'
+                title[1].className = ''
+                title[2].className = ''
+            } else if (index === 1) {
+                titleOne.className = 'title-one hide'
+                titleTwo.className = 'title-two'
+                titleThree.className = 'title-three hide'
+                title[1].className = 'show-time'
+                title[0].className = ''
+                title[2].className = ''
+                onRequestTwo()
+            } else {
+                titleOne.className = 'title-one hide'
+                titleTwo.className = 'title-two hide'
+                titleThree.className = 'title-three'
+                title[2].className = 'show-time'
+                title[1].className = ''
+                title[0].className = ''
+                onRequestThree()
+            }
+        }
+
+
+
+        function onRequestTwo() {
+            // 标题二
+            if (!isReq) return;
+            requrst({
+                url: 'bigdata/bdmap/bigdata_place_type',
+                data: {},
+                success: function (res) {
+                    let searchList = JSON.parse(res).data
+                    let titleTwo = document.getElementsByClassName('title-two')[0]
+                    searchList.forEach((item, index) => {
+                        let div = document.createElement('div')
+                        let html = `<img src="` + item.ico + `" alt=""><div>` + item.name + `</div>`
+                        div.innerHTML = html
+                        titleTwo.appendChild(div)
+                        isReq = false
+                    })
+                }
+            })
+        }
+
+        function onRequestThree() {
+            // 标题三
+            requrst({
+                url: 'bigdata/bdmap/special',
+                data: {},
+                success: function (res) {
+                    layui.use(['layer', 'tree', 'util'], function () {
+                        var layer = layui.layer;
+                        var tree = layui.tree;
+                        var util = layui.util;
+                        let data = JSON.parse(res).data
+                        let newData = []
+                        data.forEach((item, index) => {
+                            let one = { title: item.name, children: [] }
+                            if (index == 0) {
+                                item.child.forEach((it, i) => {
+                                    one.children.push({ title: it.name })
+                                })
+                            }
+                            newData.push(one)
+                        })
+                        tree.render({
+                            elem: '#test1' //默认是点击节点可进行收缩
+                            , data: newData
+                        });
+
+                    })
+                }
+            })
+        }
+
+        function onENList() {
+            let list = []
+            let urlList = [
+                'bigdata/bdmap/village_list',
+                'bigdata/bdmap/place_list'
+            ]
+            urlList.forEach((item) => {
+                requrst({
+                    url: item,
+                    data: {},
+                    success: function (res) {
+                        let data = JSON.parse(res).data
+                        if (data.length == 1) {
+                            data = data[0]
+                            wrongList.push({ e: data.longitude, n: data.latitude, name: data.name, desc: data.desc })
+                            map.centerAndZoom(new BMap.Point(data.longitude, data.latitude), 11);
+                            show_wrong()
+                        } else {
+                            data.forEach((item, index) => {
+                                list.push({ point: new BMap.Point(item.longitude, item.latitude), name: item.name, desc: item.desc })
+                            })
+                            LatAndLon.push(list)
+                            onMapStart()
+                        }
+                    }
+                })
+            })
+
+        }
+
+
+
+        function requrst(item) {
+            let url = 'http://fangyi.site888.cn/' + item.url;
+            let data = item.data;
+            $.post(url, data, function (res) {
+                item.success(res)
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>
